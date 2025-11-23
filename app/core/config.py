@@ -14,4 +14,5 @@ class Settings:
     CHUNK_OVERLAP = 150
     LLM_NAME = "gemini-2.5-flash"
     TOP_K = 3
+    SYSTEM_PROMPT=""
 settings = Settings()

@@ -1,10 +1,10 @@
 import re
 from typing import List, Dict, Tuple
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain.schema import Document
+from langchain_core.documents import Document
 from app.core.dependencies import get_embedding
 from app.core.config import settings
 
@@ -30,9 +30,6 @@ class DocumentProcessor:
             ]
         )
 
-        self.embeddings = get_embedding()
-
-        self.vectorstore = None
     def extract_chapter_section(self, text: str) -> Tuple[str, str]:
         # Pattern for chapter codes (NP, SP, PD, etc.)
 
@@ -167,7 +164,7 @@ class DocumentProcessor:
         # For procedures and checklists, try to keep them intact if possible
         if content_type in ["procedure", "checklist", "normal_procedure", "emergency_procedure"]:
             # If the content is small enough, keep as single chunk
-            if len(text) <= self.chunk_size * 1.5:
+            if len(text) <= settings.CHUNK_SIZE * 1.5:
                 doc = Document(page_content=text, metadata=metadata.copy())
                 return [doc]
 
@@ -175,8 +172,8 @@ class DocumentProcessor:
         if metadata.get("has_performance_data"):
             # Use larger chunks for tables
             table_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=self.chunk_size * 2,
-                chunk_overlap=self.chunk_overlap,
+                chunk_size=settings.CHUNK_SIZE * 2,
+                chunk_overlap=settings.CHUNK_OVERLAP,
                 length_function=len,
                 separators=["\n\n\n", "\n\n", "\n"]
             )
