@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+# Virtual Environments
+.venv/
+# Environment Variables
+.env
+# VSCode
+.vscode/
+# Data
+data/documents/*
+# Vector Store 
+vector_store/chroma_db/*
+
+
+
