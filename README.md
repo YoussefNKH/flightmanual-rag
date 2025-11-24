@@ -22,27 +22,27 @@ The system processes  documents  PDF transform them into meaningful chunks, inde
 ## 🧱 Project Architecture
 ```
 flightmanual-rag
-├── .env.example    
+├── .env.example                  # the envirement variable example
 ├── .gitignore
 ├── README.md
-├── requirements.txt
+├── requirements.txt               
 ├── data
 │    └── documents
 │        └── Boeing B737 Manual.pdf
 └── vector_store
-│    └── chroma_db
+│    └── chroma_db                 #vector_db
 └── app
     ├── main.py
     ├── api
-    │   └── endpoints.py
+    │   └── endpoints.py           #the endpoint of the api
     ├── core
-    │   ├── config.py
-    │   └── dependencies.py
+    │   ├── config.py              #contains the settings
+    │   └── dependencies.py        #creating the vector and initializing the embedding model (all-MiniLM-L6-v2)
     ├── models
-    │   └── pydantic_models.py
+    │   └── pydantic_models.py     #dto the input and the output format
     └── services
-        ├── generation_service.py
-        ├── rag_service.py
-        ├── pipeline.py
-        └── processing.py
+        ├── generation_service.py  #generate the response
+        ├── rag_service.py         #retrive and rerank
+        ├── pipeline.py            #initialize the vector_store
+        └── processing.py          #the Document processor
 ```
