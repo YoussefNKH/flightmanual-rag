@@ -143,7 +143,7 @@ Gemini then produces an answer with source mapping.
 
 ## Features
 
-- Works with PDF, DOCX, TXT, manuals, and reports  
+- Works with PDF  
 - Hybrid chunking for maximal semantic integrity  
 - Cross-encoder improves ranking accuracy  
 - Metadata-rich indexing for better grounding  
