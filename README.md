@@ -140,23 +140,6 @@ Gemini then produces an answer with source mapping.
 
 ---
 
-## 🔍 Retrieval Pipeline Summary
-[ User Query ]
-        ↓
-[ Embed Query (all-MiniLM-L6-v2) ]
-        ↓
-[ Vector Search in ChromaDB ]
-        ↓
-[ Retrieve Top 8–12 Chunks ]
-        ↓
-[ Cross-Encoder Re-ranking ]
-        ↓
-[ Select Top 3–5 Chunks ]
-        ↓
-[ Send to Gemini API ]
-        ↓
-[ Final Answer + Source Citations ]
----
 
 ## Features
 
@@ -243,4 +226,13 @@ GEMINI_API_KEY="your-key-here"
 python -m app.main
 
 ```
+Once running, open your browser and visit :
+[http://localhost:8000/docs](http://localhost:8000/docs)
 
+---
+
+## API Endpoints
+
+| Method | Endpoint      | Description                                |
+| ------ | ------------- | ------------------------------------------ |
+| POST   | `/ask`        | send your question as query to the system  |
