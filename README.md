@@ -141,20 +141,106 @@ Gemini then produces an answer with source mapping.
 ---
 
 ## 🔍 Retrieval Pipeline Summary
+[ User Query ]
+        ↓
+[ Embed Query (all-MiniLM-L6-v2) ]
+        ↓
+[ Vector Search in ChromaDB ]
+        ↓
+[ Retrieve Top 8–12 Chunks ]
+        ↓
+[ Cross-Encoder Re-ranking ]
+        ↓
+[ Select Top 3–5 Chunks ]
+        ↓
+[ Send to Gemini API ]
+        ↓
+[ Final Answer + Source Citations ]
+---
+
+## Features
+
+- Works with PDF, DOCX, TXT, manuals, and reports  
+- Hybrid chunking for maximal semantic integrity  
+- Cross-encoder improves ranking accuracy  
+- Metadata-rich indexing for better grounding  
+- Uses Gemini for final natural-language responses  
+- Clean, modular structure  
+
+---
+
+##  Challenges & Solutions
+
+### Poor results with fixed-size chunking  
+**Solution:**  
+Use structural + semantic + adaptive chunking to preserve meaning.
+
+### Vector search returned noisy or unordered chunks  
+**Solution:**  
+Cross-Encoder reranking to score relevance like a human.
+
+### PDF extraction contained noise  
+**Solution:**  
+Custom cleanup pipeline:
+- Removing headers/footers  
+- De-duplicating lines  
+- Normalizing whitespace  
+
+### Gemini context limits  
+**Solution:**  
+Strict top-k selection, reranking, and optional compression.
+
+---
+## Usage 
+### 1.Clone the repo
+
+```bash
+git clone https://github.com/YoussefNKH/flightmanual-rag.git
+
+cd flightmanual-rag
+
 ```
-**User Query**
-      ↓
-**Embed Query (all-MiniLM-L6-v2)**
-      ↓
-**Vector Search in ChromaDB**
-      ↓
-**Retrieve Top 8–12 Chunks**
-      ↓
-**Cross-Encoder Re-ranking**
-      ↓
-**Select Top 3–5 Chunks**
-      ↓
-**Send to Gemini API**
-      ↓
-**Final Answer + Source Citations**
+### 2.Create virtual envirement
+```bash
+python -m venv .venv
+
 ```
+### 2.1.Activate the  virtual envirement
+**windows**
+
+```bash
+.venv\Scripts\activate
+
+```
+
+**linux&Macos**
+
+
+```bash
+source .venv/bin/activate
+
+```
+### 3. Install dependencies
+
+```bash
+
+pip install -r requirements.txt
+
+```
+## 4. Environment Variables
+
+Create a `.env` file in the root of your project and add your Gemini API key:
+
+```env
+
+GEMINI_API_KEY="your-key-here"
+
+```
+## 5. Run the server
+
+```bash
+
+python -m app.main
+
+```
+
