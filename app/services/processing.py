@@ -203,33 +203,31 @@ class DocumentProcessor:
         loader = PyPDFLoader(file_path)
         return loader.load()
 
-    def process_documents(self, file_paths: List[str]) -> List[Document]:
+    def process_documents(self, file_path: str) -> List[Document]:
      
         all_chunks = []
-
-        for file_path in file_paths:
-            print(f"\nProcessing: {file_path}")
+        print(f"\nProcessing: {file_path}")
 
             # Load documents
-            documents = self.load_documents(file_path)
-            print(f"  Loaded {len(documents)} pages")
+        documents = self.load_documents(file_path)
+        print(f"  Loaded {len(documents)} pages")
 
             # Process each page
-            for page_num, doc in enumerate(documents):
+        for page_num, doc in enumerate(documents):
                 # Extract base metadata
-                base_metadata = self.extract_metadata(doc.page_content, file_path)
-                base_metadata["page_number"] = page_num + 1
+            base_metadata = self.extract_metadata(doc.page_content, file_path)
+            base_metadata["page_number"] = page_num + 1
 
                 # Smart chunk the page
-                page_chunks = self.smart_chunk_text(doc.page_content, base_metadata)
+            page_chunks = self.smart_chunk_text(doc.page_content, base_metadata)
 
                 # Add unique chunk IDs
-                for i, chunk in enumerate(page_chunks):
-                    chunk.metadata["chunk_id"] = f"p{page_num+1}_c{i}"
+            for i, chunk in enumerate(page_chunks):
+                chunk.metadata["chunk_id"] = f"p{page_num+1}_c{i}"
 
-                all_chunks.extend(page_chunks)
+            all_chunks.extend(page_chunks)
 
-            print(f"  Created {len([c for c in all_chunks if c.metadata['source'] == file_path])} chunks")
+        print(f"  Created {len([c for c in all_chunks if c.metadata['source'] == file_path])} chunks")
 
         print(f"\n✓ Total chunks created: {len(all_chunks)}")
         return all_chunks
