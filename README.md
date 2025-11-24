@@ -66,28 +66,28 @@ Documents are loaded with LangChain loaders such as:
 
 ---
 
-## Hybrid Chunking Strategy
+## 2 Hybrid Chunking Strategy
 
 This system uses a **hybrid multi-layer chunking strategy**:
 
-###  Structural Chunking
+### 2.1 Structural Chunking
 Chunks follow natural structure:
 - Titles
 - Headings (H1, H2, H3)
 - Paragraph boundaries
 - Section hierarchy
 
-###  Semantic Chunking
+### 2.2  Semantic Chunking
 Using `SemanticChunker` with **all-MiniLM-L6-v2** embeddings to split at meaningful semantic transitions.
 
-###  Adaptive Chunking
+### 2.3  Adaptive Chunking
 Chunk size adjusts depending on the content type:
 - Bullet lists → small chunks  
 - Procedures → isolated blocks  
 - Narrative sections → larger chunks  
 - Dense paragraphs → medium chunks  
 
-###  Metadata Augmentation
+### 2.4  Metadata Augmentation
 Each chunk includes:
 - File name  
 - Page number  
@@ -99,7 +99,7 @@ This improves retrieval and reranking accuracy.
 
 ---
 
-##  Vector Store — ChromaDB
+## 3 Vector Store — ChromaDB
 
 Chunks are embedded using **all-MiniLM-L6-v2** and stored in a persistent ChromaDB instance.
 
@@ -112,7 +112,7 @@ Vector search uses cosine similarity.
 
 ---
 
-##  Re-ranking with Cross-Encoder
+## 4 Re-ranking with Cross-Encoder
 
 After ChromaDB returns the top-k candidates:
 
@@ -128,7 +128,7 @@ This drastically increases retrieval precision, especially for:
 
 ---
 
-## 🤖 5️⃣ Generation with Gemini API
+## 5 Generation with Gemini API
 
 Gemini receives:
 - The top re-ranked chunks  
@@ -141,7 +141,7 @@ Gemini then produces an answer with source mapping.
 ---
 
 ## 🔍 Retrieval Pipeline Summary
-
+```
 **User Query**
       ↓
 **Embed Query (all-MiniLM-L6-v2)**
@@ -157,3 +157,4 @@ Gemini then produces an answer with source mapping.
 **Send to Gemini API**
       ↓
 **Final Answer + Source Citations**
+```
