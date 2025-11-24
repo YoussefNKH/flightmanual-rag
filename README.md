@@ -236,3 +236,8 @@ Once running, open your browser and visit :
 | Method | Endpoint      | Description                                |
 | ------ | ------------- | ------------------------------------------ |
 | POST   | `/ask`        | send your question as query to the system  |
+
+## TEST
+the API successfully returns the correct answer
+
+![Alt text for your image](data/img/image.png)
