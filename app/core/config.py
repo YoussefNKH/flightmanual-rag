@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-#this class for all environment variables needed to run the server
+#this class for all environment variables needed to run the server and the paths and other settings
 
 class Settings:
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")

@@ -1,5 +1,7 @@
 # app/models/pydantic_models.py
-# app/models/pydantic_models.py
+
+
+# Pydantic models for request and response schemas
 from pydantic import BaseModel, Field
 
 

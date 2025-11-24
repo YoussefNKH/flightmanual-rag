@@ -1,3 +1,4 @@
+# app/services/generation_service.py
 from google import genai
 from langchain_core.documents import Document
 from typing import List, Tuple
@@ -9,16 +10,14 @@ class GenerationService:
     def __init__(self):
         # Initialize the client once
         self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
-
+        #Method for building system prompt from settings
     def build_prompt(self, context: str, query: str) -> str:
-        """Build prompt using the template stored in settings."""
         return settings.SYSTEM_PROMPT.format(context=context, query=query)
 
     def generate_answer(self, query: str, vectore_store):
         # Get retrieved and reranked documents
         retrieved_and_reranked_doc = retrieve_and_rerank(query=query, vectore_store=vectore_store)
         
-        # Fix: access the function result correctly (it was trying to index the function itself)
         top = retrieved_and_reranked_doc[0]  # Get the first document
         
         # Extract content and metadata
@@ -32,9 +31,9 @@ class GenerationService:
         # Build prompt
         prompt = self.build_prompt(top_passage, query)
         
-        # Generate content using the new API
+        # Generate answer using Gemini API
         response = self.client.models.generate_content(
-            model=settings.LLM_NAME,  # e.g., "gemini-2.0-flash-exp" or "gemini-2.5-flash"
+            model=settings.LLM_NAME, 
             contents=prompt
         )
         

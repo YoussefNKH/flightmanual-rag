@@ -1,8 +1,11 @@
+# app/services/pipeline.py
+from app.services.generation_service import GenerationService
 from app.services.processing import DocumentProcessor
 
 class PipelineService:
     def __init__(self):
         self.processor = DocumentProcessor()
+        self.generation_service = GenerationService()
     
     def process_and_store(self, file_path: str, create_vector_store):
         # Process document to get chunks

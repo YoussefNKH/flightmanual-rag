@@ -1,3 +1,4 @@
+# app/main.py
 from fastapi.concurrency import asynccontextmanager
 from app.api import endpoints
 from app.core.dependencies import create_vector_store
@@ -18,24 +19,22 @@ async def lifespan(app: FastAPI):
     
     print(" Starting up... Processing document and creating vector store")
     
-    # Initialize pipeline service
+    # Initialize pipeline service to  initialize vector store and generation service
     pipeline_service = PipelineService()
     
-    # Process document and create vector store
+    # Process document and create vector store before starting the server
     vector_store = pipeline_service.process_and_store(
         file_path="data/documents/Boeing B737 Manual.pdf",
         create_vector_store=create_vector_store
     )
-    
     # Initialize generation service
-    generation_service = GenerationService()
+    generation_service = pipeline_service.generation_service
     
     print(" Vector store and generation service initialized successfully")
     
-    yield  # Server is running
+    yield  
     
-    # Cleanup (if needed)
-    print("🛑 Shutting down...")
+    print(" Shutting down...")
 
 app = FastAPI(
     title="Flight Manual RAG API",

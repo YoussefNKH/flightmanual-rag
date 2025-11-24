@@ -6,8 +6,6 @@ __pycache__/
 .env
 # VSCode
 .vscode/
-# Data
-data/documents/*
 # Vector Store 
 vector_store/chroma_db/*
 

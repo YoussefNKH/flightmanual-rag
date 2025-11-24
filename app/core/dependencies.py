@@ -3,7 +3,7 @@ from typing import List
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_core.documents import Document
-from .config import settings
+from app.core.config import settings
 
 def get_embedding():
     return HuggingFaceEmbeddings(

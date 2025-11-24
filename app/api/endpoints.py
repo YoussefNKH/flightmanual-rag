@@ -1,11 +1,11 @@
+# app/api/endpoints.py
 from fastapi import APIRouter, HTTPException
 from app.models.pydantic_models import QueryRequest, QueryResponse
 
 
-
 router = APIRouter()
 
-
+#getting the global vector store and generation service
 def get_vector_store():
     from app.main import vector_store
     if vector_store is None:
