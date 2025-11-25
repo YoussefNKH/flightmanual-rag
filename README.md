@@ -1,9 +1,9 @@
-# 📚 RAG System with LangChain, ChromaDB, Gemini API & Cross-Encoder Re-ranking
+# RAG System with LangChain, ChromaDB, Gemini API & Cross-Encoder Re-ranking
 A modular Retrieval-Augmented Generation pipeline using hybrid chunking, semantic metadata, and cross-encoder reranking for high-accuracy technical question answering.
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 This project implements a complete RAG (Retrieval-Augmented Generation) system built on:
 
@@ -22,7 +22,7 @@ The system processes  documents  PDF transform them into meaningful chunks, inde
 ---
 
 
-## 🧱 Project Architecture
+##  Project Architecture
 ```
 flightmanual-rag
 ├── .env.example                  # the envirement variable example
