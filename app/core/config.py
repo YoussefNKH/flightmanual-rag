@@ -13,7 +13,7 @@ class Settings:
     DATA_PATH = "data/documents/"
     CHUNK_SIZE = 800
     CHUNK_OVERLAP = 150
-    LLM_NAME = "gemini-2.5-flash"
+    LLM_NAME = "gemini-2.5-pro"
     TOP_K = 3
     SYSTEM_PROMPT="""
 You are a Boeing 737 operations expert.
